@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 800px;
+      /* height: 500px; */
+      margin: 0 auto;
+      padding: 0 auto;
+      /*  不能被选中*/
+      user-select: none;
+
+    }
+
+    table {
+      /* border: 1px solid black; */
+      text-align: center;
+    }
+
+    thead tr {
+      width: 200px;
+      height: 30px;
+      background-color: pink;
+    }
+
+    tbody td {
+      width: 200px;
+      height: 60px;
+      line-height: 60px;
+    }
+
+    button {
+      width: 20px;
+      height: 20px;
+      border: 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <table border="1" cellpading="0" cellspacing="0">
+      <thead>
+        <tr>
+          <td>商品</td>
+          <td>单价</td>
+          <td>数量</td>
+          <td>小计</td>
+        </tr>
+
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td class="price">8</td class="price">
+          <td><button class="down">-</button class="down"><span class="num">0</span><button class="add">+</button
+              class="add"></td>
+          <td><span class="numm">0</span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="price">12</td>
+          <td><button class="down">-</button class="down"><span class="num">0</span class="num"><button
+              class="add">+</button class="add"></td>
+          <td><span class="numm">0</span class="numm"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="price">5.5</td class="price">
+          <td><button class="down">-</button class="down"><span class="num">0</span class="num"><button
+              class="add">+</button></td>
+          <td><span class="numm">0</span class="numm"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="price">24</td class="price">
+          <td><button class="down">-</button><span class="num">0</span class="num"><button class="add">+</button
+              class="add"></td>
+          <td><span class="numm">0</span class="numm"></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2">已选中商品: <span class="check">0</span>个</td>
+          <td colspan="2">合计费用: <span class="total">0</span></tdcolspan="2">
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div></div>
+
+  <script>
+    var add = document.getElementsByClassName("add");
+    var down = document.getElementsByClassName("down");
+    var price = document.getElementsByClassName("price");
+    var num = document.getElementsByClassName("num");
+    var numm = document.getElementsByClassName("numm");
+    var check = document.getElementsByClassName("check")[0];
+    var total = document.getElementsByClassName("total")[0];
+
+
+    for (var i = 0; i < add.length; i++) {
+      //点击按钮添加
+      add[i].index = i;
+      add[i].onclick = function () {
+        var a = (num[this.index].innerHTML - 0);
+        a++;
+        num[this.index].innerHTML = a;
+        var b = ((price[this.index].innerHTML - 0) * a);
+        numm[this.index].innerHTML = b;
+
+        //总计多少件商品和一共价格
+        var zongji = 0;
+        var zongjii = 0;
+        for (var j = 0; j < num.length; j++) {
+          zongji += (num[j].innerHTML - 0)
+          zongjii += (numm[j].innerHTML - 0)
+        }
+        check.innerHTML = zongji;
+        total.innerHTML = zongjii;
+      }
+      //点击按钮减少
+      down[i].index = i;
+      down[i].onclick = function () {
+        var a = (num[this.index].innerHTML - 0);
+        a--;
+        if (a <= 0) {
+          a = 0
+        }
+        num[this.index].innerHTML = a;
+        var b = ((price[this.index].innerHTML - 0) * a)
+        numm[this.index].innerHTML = b
+        //总计多少件商品和一共价格
+        var zongji = 0;
+        var zongjii = 0;
+        for (var j = 0; j < num.length; j++) {
+          zongji += (num[j].innerHTML - 0);
+          zongjii += (numm[j].innerHTML - 0);
+        }
+        check.innerHTML = zongji;
+        total.innerHTML = zongjii;
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>
